@@ -4,12 +4,14 @@
 
 void weapon_init() {
   ledcAttachPin(ESC_CONTROL_PIN, ESC_CHANNEL);
-  ledcSetup(ESC_CHANNEL, 50, 8);
+  ledcSetup(ESC_CHANNEL, ESC_FREQUENCY, 8);
   ledcWrite(ESC_CHANNEL, ESC_DUTY_MIN);
 
   for (int i = 0; i < WEAPON_LEDS; i++) {
-    pinMode(weapon_led_pins[i], OUTPUT);
+    ledcAttachPin(weapon_led_pins[i], WEAPON_LEDS_CHANNEL);
   }
+  ledcSetup(WEAPON_LEDS_CHANNEL, WEAPON_LEDS_FREQUENCY, 8);
+  ledcWrite(WEAPON_LEDS_CHANNEL, 0);
 }
 
 void weapon_set_speed(float speed) {
@@ -21,8 +23,5 @@ void weapon_set_speed(float speed) {
   Serial.print(duty);
 
   ledcWrite(ESC_CHANNEL, duty);
-
-  for (int i = 0; i < WEAPON_LEDS; i++) {
-    digitalWrite(weapon_led_pins[i], speed > 0.05 ? HIGH : LOW);
-  }
+  ledcWrite(WEAPON_LEDS_CHANNEL, 255*speed);
 }
