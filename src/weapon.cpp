@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 
+bool armed = false;
+
 void weapon_init() {
   ledcAttachPin(ESC_CONTROL_PIN, ESC_CHANNEL);
   ledcSetup(ESC_CHANNEL, ESC_FREQUENCY, ESC_RESOLUTION);
@@ -14,7 +16,20 @@ void weapon_init() {
   ledcWrite(WEAPON_LEDS_CHANNEL, 0);
 }
 
+void weapon_arm() {
+  armed = true;
+}
+
+void weapon_unarm() {
+  armed = false;
+  weapon_set_speed(0);
+}
+
 void weapon_set_speed(float speed) {
+  if (!armed) {
+    speed = 0;
+  }
+
   uint32_t duty = ESC_DUTY_MIN + (ESC_DUTY_MAX - ESC_DUTY_MIN) * speed;
 
   Serial.print(" Weapon Speed: ");

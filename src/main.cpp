@@ -81,6 +81,14 @@ void loop() {
     steering_mode = TANK;
   }
 
+  if (controller.xboxNotif.btnA) {
+    weapon_arm();
+  }
+
+  if (controller.xboxNotif.btnB) {
+    weapon_unarm();
+  }
+
   weapon_set_speed(((float)controller.xboxNotif.trigLT + (float)controller.xboxNotif.trigRT) / (2 * CONTROLLER_TRIGGER_MAX));
   
   float left_ver = -2*(float)controller.xboxNotif.joyLVert / CONTROLLER_JOY_MAX + 1;
