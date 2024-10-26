@@ -1,12 +1,13 @@
 #pragma once
 
 #define ESC_CHANNEL 0
+#define ESC_RESOLUTION 8
 #define ESC_CONTROL_PIN 22
 #define ESC_POWER_PIN 23
 
 #define ESC_DUTY_MIN 12
 #define ESC_DUTY_MAX 26
-#define ESC_FREQUENCY 2000
+#define ESC_FREQUENCY 50
 
 #define WEAPON_LEDS 2
 #define WEAPON_LEDS_CHANNEL 1

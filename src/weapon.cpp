@@ -4,13 +4,13 @@
 
 void weapon_init() {
   ledcAttachPin(ESC_CONTROL_PIN, ESC_CHANNEL);
-  ledcSetup(ESC_CHANNEL, ESC_FREQUENCY, 8);
+  ledcSetup(ESC_CHANNEL, ESC_FREQUENCY, ESC_RESOLUTION);
   ledcWrite(ESC_CHANNEL, ESC_DUTY_MIN);
 
   for (int i = 0; i < WEAPON_LEDS; i++) {
     ledcAttachPin(weapon_led_pins[i], WEAPON_LEDS_CHANNEL);
   }
-  ledcSetup(WEAPON_LEDS_CHANNEL, WEAPON_LEDS_FREQUENCY, 8);
+  ledcSetup(WEAPON_LEDS_CHANNEL, WEAPON_LEDS_FREQUENCY, ESC_RESOLUTION);
   ledcWrite(WEAPON_LEDS_CHANNEL, 0);
 }
 
