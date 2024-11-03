@@ -14,6 +14,12 @@ void weapon_init() {
   }
   ledcSetup(WEAPON_LEDS_CHANNEL, WEAPON_LEDS_FREQUENCY, ESC_RESOLUTION);
   ledcWrite(WEAPON_LEDS_CHANNEL, 0);
+
+ for (int i = 0; i < WEAPON_LEDS_OFF; i++) {
+    ledcAttachPin(weapon_led_off_pins[i], WEAPON_LEDS_OFF_CHANNEL);
+  }
+  ledcSetup(WEAPON_LEDS_OFF_CHANNEL, WEAPON_LEDS_FREQUENCY, ESC_RESOLUTION);
+  ledcWrite(WEAPON_LEDS_OFF_CHANNEL, 0);
 }
 
 void weapon_arm() {
@@ -39,4 +45,5 @@ void weapon_set_speed(float speed) {
 
   ledcWrite(ESC_CHANNEL, duty);
   ledcWrite(WEAPON_LEDS_CHANNEL, 255*speed);
+  ledcWrite(WEAPON_LEDS_OFF_CHANNEL, 0);
 }
